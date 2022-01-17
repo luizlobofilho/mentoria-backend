@@ -9,9 +9,10 @@ namespace DesafioMentoria.Application.Dtos
         public int Id { get; set; }
         public string Nome  { get; set; }
         public string Cpf { get; set; }
-        public DateTime? DataNascimento { get; set; }
+        public string DataNascimento { get; set; }
         public int Sexo { get; set; }
         public bool Ativo { get; set; }
 
+ 
     }
 }

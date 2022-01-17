@@ -4,19 +4,23 @@ using DesafioMentoria.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DesafioMentoria.Application.Mappers
 {
     public class MapperPessoa : IMapperPessoa
     {
+        Regex rgx = new Regex("[^0-9]");
+
         public Pessoa MapperDtoToEntity(PessoaDto pessoaDto)
         {
+
             var pessoa = new Pessoa()
             {
                 Id = pessoaDto.Id,
                 Nome = pessoaDto.Nome,
-                Cpf = pessoaDto.Cpf,
-                DataNascimento = (DateTime)pessoaDto.DataNascimento,
+                Cpf = rgx.Replace(pessoaDto.Cpf, ""),
+                DataNascimento = Convert.ToDateTime(pessoaDto.DataNascimento),
                 Sexo = pessoaDto.Sexo,
                 Ativo = pessoaDto.Ativo
 
@@ -31,7 +35,7 @@ namespace DesafioMentoria.Application.Mappers
                 Id = pessoa.Id,
                 Nome = pessoa.Nome,
                 Cpf = pessoa.Cpf,
-                DataNascimento = pessoa.DataNascimento,
+                DataNascimento = pessoa.DataNascimento.ToString(),
                 Sexo = pessoa.Sexo,
                 Ativo = pessoa.Ativo
             };
@@ -46,7 +50,7 @@ namespace DesafioMentoria.Application.Mappers
                Nome = c.Nome,
                Sexo= c.Sexo,    
                Cpf= c.Cpf,
-               DataNascimento= c.DataNascimento,   
+               DataNascimento= c.DataNascimento.ToString(),   
                Ativo= c.Ativo
             });
             return dto;
